@@ -1,0 +1,42 @@
+---
+// Flota: banda azul noche con el titular y, debajo, una franja de fotos de borde a borde sin margen (4 columnas en
+// escritorio, 2 en tableta, 1 en móvil). Cada vehículo: foto a sangre oscurecida abajo, señal redonda con su icono,
+// nombre y texto. Campos: `items[]` {titulo, texto, imagen, icono}. Sin foto, la casilla queda en color asfalto.
+import { seccion, valor } from '../../data/site';
+import { altFicha } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const vehiculos = s ? s.items.filter((it) => it && valor(it.titulo)) : [];
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-noche">
+      <div class="contenedor seccion !pb-12 md:!pb-16">
+        <div class="cabeza !mb-0">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="cabeza-texto">{s.texto}</p>}
+        </div>
+      </div>
+      {vehiculos.length > 0 && (
+        <ul class="franja">
+          {vehiculos.map((it) => (
+            <li class="vehiculo bg-[var(--asfalto)]">
+              {it.imagen && <Imagen src={it.imagen} alt={altFicha(it)} ancho={900} alto={1200} />}
+              <div class="vehiculo-cuerpo">
+                {it.icono && <span class="senal-redonda mb-4 w-12" style="--aro: var(--c-acento)"><Icono nombre={it.icono} tam={22} /></span>}
+                <h3>{it.titulo}</h3>
+                {it.texto && <p class="mt-2 max-w-[24rem] opacity-90">{it.texto}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.cta?.url && <div class="contenedor py-10"><a class="btn btn-amarillo" href={s.cta.url}>{s.cta.texto}</a></div>}
+    </section>
+  )
+}

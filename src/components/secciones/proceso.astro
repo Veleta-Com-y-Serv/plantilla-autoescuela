@@ -1,0 +1,38 @@
+---
+// Cómo funciona: banda clara con una carretera que cruza la ventana de borde a borde (azul con la raya amarilla) y
+// los pasos como hitos numerados sobre ella; en móvil la carretera baja en vertical a la izquierda.
+// Campos: `items[]` {titulo, texto, icono}; `cta` opcional. Sin pasos queda solo el titular.
+import { seccion, valor } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const pasos = s ? s.items.filter((it) => it && valor(it.titulo)) : [];
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-clara seccion">
+      <div class="contenedor">
+        <div class="cabeza">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="cabeza-texto">{s.texto}</p>}
+        </div>
+        {pasos.length > 0 && (
+          <ol class="ruta">
+            {pasos.map((it, i) => (
+              <li class="hito">
+                <span class="hito-num" aria-hidden="true">{i + 1}</span>
+                {it.icono && <Icono nombre={it.icono} tam={28} class="text-primario" />}
+                <h3 class="mt-3"><span class="sr-only">Paso {i + 1}: </span>{it.titulo}</h3>
+                {it.texto && <p class="mt-3 max-w-[22rem] opacity-85">{it.texto}</p>}
+              </li>
+            ))}
+          </ol>
+        )}
+        {s.cta?.url && <a class="btn mt-12" href={s.cta.url}>{s.cta.texto}</a>}
+      </div>
+    </section>
+  )
+}

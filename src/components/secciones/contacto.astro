@@ -1,0 +1,67 @@
+---
+// Contacto: banda clara partida. A la izquierda titular, el teléfono en grande, datos con icono en señal redonda y
+// formulario (mailto); a la derecha el plano a sangre hasta el borde de la ventana (enlaza a mapas), con una franja
+// amarilla discontinua encima. Sin plano, el formulario pasa a la derecha.
+// Campos: antetitulo, titulo, texto, imagen (plano opcional), boton (texto del botón, opcional).
+import { seccion, site, tel, mapa, whatsapp, valor } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const datos = [
+  c.direccion && { icono: 'mapa', valor: c.direccion, url: mapa(c.direccion), externo: true },
+  c.whatsapp && { icono: 'whatsapp', valor: c.whatsapp, url: whatsapp(c.whatsapp), externo: true },
+  c.email && { icono: 'correo', valor: c.email, url: `mailto:${c.email}`, externo: false },
+  c.horario && { icono: 'reloj', valor: c.horario, url: '', externo: false },
+].filter(Boolean) as { icono: string; valor: string; url: string; externo: boolean }[];
+const boton = valor(s?.boton) || undefined;
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-clara">
+      <div class="fila-sangre fila-sangre--der">
+        {s.imagen ? (
+          <a href={mapa(c.direccion) || undefined} rel="noopener" target="_blank" class="plano fila-sangre-foto" aria-label={c.direccion ? `Ver ${c.direccion} en el mapa` : site.nombre}>
+            <Imagen src={s.imagen} alt="" ancho={1200} alto={1000} />
+          </a>
+        ) : (
+          <div class="fila-sangre-texto bg-[var(--azul-suave)]">
+            <FormularioContacto boton={boton} prefijo={`${id}-f`} />
+          </div>
+        )}
+        <div class="fila-sangre-texto">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {c.telefono && (
+            <p class="mt-8">
+              <a class="dato dato--grande no-underline" href={tel(c.telefono)}>
+                <span class="senal-redonda w-14"><Icono nombre="telefono" tam={24} /></span>{c.telefono}
+              </a>
+            </p>
+          )}
+          {datos.length > 0 && (
+            <ul class="datos">
+              {datos.map((d) => (
+                <li class="dato">
+                  <span class="senal-redonda"><Icono nombre={d.icono} tam={20} /></span>
+                  <span class="min-w-0 break-words">
+                    {d.url ? <a href={d.url} rel={d.externo ? 'noopener' : undefined} target={d.externo ? '_blank' : undefined}>{d.valor}</a> : d.valor}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.imagen && (
+            <div class="mt-12 border-t-4 border-dashed border-primario/20 pt-10">
+              <FormularioContacto boton={boton} prefijo={`${id}-f`} />
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

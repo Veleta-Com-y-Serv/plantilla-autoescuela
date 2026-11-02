@@ -1,0 +1,61 @@
+---
+// Portada a pantalla casi completa: foto a sangre de carretera oscurecida desde abajo y la izquierda, título enorme,
+// texto corto y dos botones. A la derecha, el disco de precio (amarillo con aro azul y blanco, como una señal):
+// `destacado` {titulo, precio, texto}; sin precio no sale. Debajo, la franja de carretera (asfalto con la raya
+// amarilla discontinua) con los datos rápidos `items[]` {titulo, icono}; sin datos no sale.
+import { seccion, valor } from '../../data/site';
+import { altHero } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = true } = Astro.props;
+const s = seccion(id);
+const d = (s?.destacado ?? {}) as Record<string, unknown>;
+const disco = { titulo: valor(d.titulo), precio: valor(d.precio), texto: valor(d.texto) };
+const datos = s ? s.items.filter((it) => it && valor(it.titulo)).slice(0, 4) : [];
+const H = primera ? 'h1' : 'h2';
+---
+
+{
+  s && (
+    <section id={id} class="hero" aria-label={valor(s.titulo) || undefined}>
+      {s.imagen && (
+        <div class="hero-foto">
+          <Imagen src={s.imagen} alt={altHero()} ancho={1920} alto={1080} prioridad={primera} />
+        </div>
+      )}
+      <div class="contenedor hero-cuerpo">
+        <div>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <H>{s.titulo}</H>}
+          {s.texto && <p class="hero-texto">{s.texto}</p>}
+          {(s.cta?.url || s.cta_secundario?.url) && (
+            <div class="mt-9 flex flex-wrap gap-3.5">
+              {s.cta?.url && <a class="btn btn-amarillo" href={s.cta.url}>{s.cta.texto}</a>}
+              {s.cta_secundario?.url && <a class="btn-sec" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+            </div>
+          )}
+        </div>
+        {disco.precio && (
+          <p class="disco mb-3 ml-3 justify-self-start lg:mb-4 lg:ml-0 lg:mr-4 lg:justify-self-end">
+            {disco.titulo && <span class="disco-titulo">{disco.titulo}</span>}
+            <span class="disco-precio">{disco.precio}</span>
+            {disco.texto && <span class="disco-texto">{disco.texto}</span>}
+          </p>
+        )}
+      </div>
+      {datos.length > 0 && (
+        <div class="hero-carretera">
+          <ul class="contenedor hero-datos">
+            {datos.map((it) => (
+              <li class="hero-dato">
+                <span class="senal-redonda w-12" style="--aro: var(--c-acento)"><Icono nombre={it.icono} tam={22} /></span>
+                {it.titulo}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  )
+}

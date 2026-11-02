@@ -1,0 +1,39 @@
+---
+// Resultados: banda amarilla partida 50/50; a la izquierda el titular y las cifras dentro de señales redondas (disco
+// blanco con aro azul) en dos columnas; a la derecha la foto a sangre (pista de prácticas). Sin imagen, las cifras van
+// en una fila de cuatro a todo el ancho. Campos: `items[]` {titulo = la cifra, texto}, `imagen`.
+// Sin cifras la sección no se pinta (la plataforma nunca las inventa).
+import { seccion, valor } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const cifras = s ? s.items.filter((it) => it && valor(it.titulo)) : [];
+---
+
+{
+  s && cifras.length > 0 && (
+    <section id={id} class:list={['banda banda-amarilla', !s.imagen && 'seccion']}>
+      <div class:list={[s.imagen ? 'fila-sangre fila-sangre--der' : 'contenedor']}>
+        {s.imagen && (
+          <div class="fila-sangre-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1400} alto={1050} />
+          </div>
+        )}
+        <div class:list={[s.imagen && 'fila-sangre-texto']}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          <ul class:list={['cifras', !s.imagen && 'lg:grid-cols-4']}>
+            {cifras.map((it) => (
+              <li class="cifra">
+                <span class="senal-redonda">{it.titulo}</span>
+                {it.texto && <p>{it.texto}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,51 @@
+---
+// Packs: banda de asfalto (primario muy oscuro) con los packs como carriles de una autovía: columnas separadas por
+// rayas blancas discontinuas y bordes continuos arriba y abajo. El pack `destacado` va en amarillo con un cartel
+// (`etiqueta_destacado`, vacío = sin cartel). Campos: `packs[]` {nombre, texto, precio, incluye (separado por «;»),
+// destacado}; `cta` (botón de cada pack). Sin precio no hay precio; sin packs queda solo el titular.
+import { seccion, valor, partes } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const packs = s ? s.packs.filter((p) => p && valor(p.nombre)) : [];
+const etiqueta = valor(s?.etiqueta_destacado);
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-asfalto seccion !pb-0">
+      <div class="contenedor">
+        <div class="cabeza">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="cabeza-texto">{s.texto}</p>}
+        </div>
+      </div>
+      {packs.length > 0 && (
+        <div class="carriles">
+          {packs.map((p) => (
+            <article class:list={['carril', p.destacado === true && 'carril--destacado']}>
+              <div>
+                {p.destacado === true && etiqueta && <p class="etiqueta mb-5"><Icono nombre="estrella" tam={14} />{etiqueta}</p>}
+                <h3 class="text-[clamp(1.8rem,2.6vw,2.3rem)]">{p.nombre}</h3>
+                {p.texto && <p class="mt-3 max-w-[30rem] opacity-85">{p.texto}</p>}
+                {valor(p.precio) && <p class="carril-precio">{p.precio}</p>}
+                {partes(p.incluye).length > 0 && (
+                  <ul class="lista-check mt-7">
+                    {partes(p.incluye).map((x) => <li><Icono nombre="check" tam={18} />{x}</li>)}
+                  </ul>
+                )}
+              </div>
+              {s.cta?.url && (
+                <p class="mt-auto pt-9">
+                  <a class:list={['btn', p.destacado === true ? '' : 'btn-amarillo']} href={s.cta.url}>{s.cta.texto}</a>
+                </p>
+              )}
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
+  )
+}

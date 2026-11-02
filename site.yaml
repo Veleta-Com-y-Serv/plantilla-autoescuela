@@ -1,0 +1,167 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas siempre planas: nunca una lista dentro de un elemento de lista. Precios siempre entre comillas.
+nombre: Autoescuela Bernesga
+eslogan: Carnet de coche, moto y camión en León.
+sector: autoescuela
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = placa «L» + nombre.
+colores:
+  primario: "#14213d"   # azul noche (botones, carriles, paneles, pie)
+  acento: "#ffc21a"     # amarillo señal (cabecera, bandas, rayas y discos)
+  fondo: "#f6f5f0"      # blanco roto
+  texto: "#101a30"
+contacto:
+  telefono: "987 31 64 20"
+  email: hola@autoescuelabernesga.es
+  direccion: Avenida de Padre Isla 58, 24002 León (León)
+  horario: "Oficina: lunes a viernes, de 9:30 a 13:30 y de 16:30 a 20:30."
+  whatsapp: "+34 655 31 64 20"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Permisos, url: "/#permisos" }
+  - { texto: Packs, url: "/#packs" }
+  - { texto: Cómo funciona, url: "/#proceso" }
+  - { texto: Teórica, url: "/#horario" }
+  - { texto: Flota, url: "/#flota" }
+  - { texto: Preguntas, url: "/#preguntas" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Matricúlate, url: "/#matricula" }
+seo:
+  titulo: Autoescuela Bernesga · Carnet de coche y moto en León
+  descripcion: "Autoescuela en León: permiso B, moto A2 y AM, y camión C. Teórica presencial y online, prácticas con doble mando y te acompañamos al examen."
+  tipo: DrivingSchool   # tipo de schema.org (DrivingSchool, EducationalOrganization…)
+marca_pie: true   # «Web creada con NoExpertise» en el pie
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Autoescuela en León
+    titulo: Tu carnet, sin dar vueltas
+    texto: "Teórica a tu ritmo, prácticas por las calles donde vas a examinarte y un profesor que te conoce por tu nombre. Empieza esta semana."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Matricúlate, url: "/#matricula" }
+    cta_secundario: { texto: Ver los packs, url: "/#packs" }
+    destacado: { titulo: Pack carnet B, precio: "590 €", texto: "Matrícula, teórica y 20 prácticas" }   # disco de precio sobre la foto (sin precio no sale)
+    items:   # datos rápidos en la franja de carretera, con icono
+      - { titulo: Teórica presencial y online, icono: test }
+      - { titulo: Coches con doble mando, icono: volante }
+      - { titulo: Te acompañamos al examen, icono: ruta }
+
+  permisos:
+    activa: true
+    antetitulo: Permisos
+    titulo: Elige qué quieres conducir
+    texto: "Del ciclomotor al camión. Cada permiso con su teórica, sus prácticas y la gestión del examen con Tráfico."
+    cta: { texto: Quiero este permiso, url: "/#matricula" }   # botón de cada permiso
+    permisos:
+      - { nombre: Permiso B, texto: "El carnet de coche de toda la vida. Para turismos de hasta 3.500 kilos y nueve plazas.", precio: "desde 390 €", incluye: "Matrícula; Teórica presencial y online; 10 prácticas", edad_minima: "18", icono: coche }
+      - { nombre: Permiso A2, texto: "Motos de hasta 35 kW. Prácticas en pista cerrada y en circulación con intercomunicador.", precio: "desde 450 €", incluye: "Matrícula; Pista de maniobras; 8 prácticas en circulación", edad_minima: "18", icono: moto }
+      - { nombre: Permiso AM, texto: "Ciclomotores de hasta 50 cc y cuadriciclos ligeros. Ideal para moverse por León desde los quince.", precio: "desde 220 €", incluye: "Matrícula; Teórica; Prácticas en pista", edad_minima: "15", icono: ciclomotor }
+      - { nombre: Permiso C, texto: "Camiones de más de 3.500 kilos. Para quien quiere trabajar en el transporte.", precio: "desde 980 €", incluye: "Matrícula; Teórica específica; Prácticas en camión", edad_minima: "21", icono: camion }
+
+  packs:
+    activa: true
+    antetitulo: Packs
+    titulo: Un precio cerrado, sin sorpresas
+    texto: "Las tasas de Tráfico se pagan aparte y te ayudamos con el trámite."
+    etiqueta_destacado: El más elegido   # cartel del pack destacado (vacío = sin cartel)
+    cta: { texto: Elegir este pack, url: "/#matricula" }
+    packs:
+      - { nombre: Solo teórica, texto: "Para aprobar el test antes de ponerte al volante.", precio: "190 €", incluye: "Matrícula; Clases presenciales; Plataforma de test online; Repaso antes del examen", destacado: false }
+      - { nombre: Carnet B completo, texto: "Todo lo que necesitas para sacarte el carnet de coche.", precio: "590 €", incluye: "Matrícula; Teórica presencial y online; 20 prácticas; Acompañamiento al examen", destacado: true }
+      - { nombre: Intensivo en un mes, texto: "Para quien tiene prisa: teórica y prácticas casi a diario.", precio: "890 €", incluye: "Matrícula; Teórica intensiva; 30 prácticas; Prioridad de fecha de examen", destacado: false }
+
+  proceso:
+    activa: true
+    antetitulo: Cómo funciona
+    titulo: Cuatro paradas hasta tu carnet
+    texto: "Sin papeleo por tu cuenta: nosotros nos encargamos de Tráfico."
+    items:   # pasos (el número sale solo)
+      - { titulo: Matrícula, texto: "Ven a la oficina o escríbenos. Solo necesitas el DNI y una foto.", icono: lapiz }
+      - { titulo: Teórica, texto: "Clases en el aula y test online desde el móvil. Te presentamos cuando estés listo.", icono: test }
+      - { titulo: Prácticas, texto: "Con doble mando, por las rutas del examen y a las horas que te vengan bien.", icono: volante }
+      - { titulo: Examen, texto: "Te llevamos al centro de examen y te acompañamos hasta el final.", icono: ruta }
+
+  horario:
+    activa: true
+    antetitulo: Horario de teórica
+    titulo: Clases en el aula, mañana y tarde
+    texto: "Ven a la que mejor te venga, sin apuntarte. Y entre clase y clase, test online desde casa."
+    imagen: /fotos/aula.jpg
+    horario:
+      - { dia: Lunes a jueves, horas: "10:00 a 11:30", clase: Teórica de mañana }
+      - { dia: Lunes a jueves, horas: "17:00 a 18:30", clase: Teórica de tarde }
+      - { dia: Lunes a jueves, horas: "19:00 a 20:30", clase: Teórica de última hora }
+      - { dia: Viernes, horas: "17:00 a 19:00", clase: Repaso de test y dudas }
+    nota: "Las prácticas se reservan aparte, de lunes a sábado, de 8:00 a 21:00."
+
+  flota:
+    activa: true
+    antetitulo: Flota
+    titulo: Vehículos nuevos y con doble mando
+    texto: "Coches y motos de este año, revisados cada mes. Prácticas en el mismo modelo con el que te examinas."
+    items:   # cada vehículo con foto, nombre, texto e icono
+      - { titulo: Utilitario manual, texto: "Cinco puertas, cambio manual y doble mando. El de casi todos los alumnos.", imagen: /fotos/flota-1.jpg, icono: coche }
+      - { titulo: Coche automático, texto: "Para quien prefiere examinarse con cambio automático.", imagen: /fotos/flota-2.jpg, icono: coche }
+      - { titulo: Moto A2, texto: "Naked de media cilindrada, con intercomunicador para las prácticas.", imagen: /fotos/flota-3.jpg, icono: moto }
+      - { titulo: Camión rígido, texto: "Para el permiso C, con cabina amplia y cámara trasera.", imagen: /fotos/flota-4.jpg, icono: camion }
+
+  resultados:
+    activa: true
+    antetitulo: Resultados
+    titulo: Aprobar a la primera es lo normal aquí
+    texto: "Datos de nuestro alumnado del último año."
+    imagen: /fotos/pista.jpg
+    items:   # titulo = la cifra; sin cifras la sección no se pinta
+      - { titulo: "89 %", texto: aprueba el teórico a la primera }
+      - { titulo: "78 %", texto: aprueba el práctico a la primera }
+      - { titulo: "25", texto: años enseñando a conducir en León }
+      - { titulo: "+600", texto: carnets al año }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que cuentan quienes ya conducen
+    imagen: /fotos/volante.jpg   # foto de fondo (oscurecida)
+    testimonios:
+      - { texto: "Me daba pánico conducir y aprobé a la primera. Javier tiene una paciencia infinita y las prácticas por la ruta del examen ayudan muchísimo.", autor: Lucía M., detalle: Permiso B }
+      - { texto: "Hice el intensivo en verano y en un mes tenía el carnet. Todo muy bien organizado.", autor: Daniel R., detalle: Pack intensivo }
+      - { texto: "Las clases de moto en pista me dieron mucha seguridad antes de salir a la calle.", autor: Irene P., detalle: Permiso A2 }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Lo que nos preguntáis antes de empezar
+    texto: "¿Te queda alguna duda? Llámanos o escríbenos por WhatsApp."
+    cta: { texto: Hacer una pregunta, url: "/#contacto" }
+    preguntas:
+      - { pregunta: ¿Qué necesito para matricularme?, respuesta: "El DNI o NIE en vigor y una foto de carnet. El certificado médico te decimos dónde hacerlo cerca de la autoescuela." }
+      - { pregunta: ¿Puedo hacer la teórica online?, respuesta: "Sí. Tienes acceso a la plataforma de test desde el móvil y puedes venir a las clases del aula cuando quieras, sin apuntarte." }
+      - { pregunta: ¿Cuántas prácticas voy a necesitar?, respuesta: "Depende de cada persona. La media está entre 20 y 25. Tu profesor te dirá con sinceridad cuándo estás listo para el examen." }
+      - { pregunta: ¿Las tasas de Tráfico están incluidas?, respuesta: "No, las tasas de Tráfico se pagan aparte. Nosotros hacemos el trámite y te explicamos cómo pagarlas." }
+      - { pregunta: ¿Puedo empezar las prácticas antes de aprobar la teórica?, respuesta: "Sí, puedes ir avanzando con las prácticas mientras preparas el test, así llegas antes al examen." }
+      - { pregunta: "¿Vengo de otra autoescuela, puedo cambiarme?", respuesta: "Claro. Pedimos tu expediente a Tráfico y seguimos desde donde lo dejaste, sin repetir lo que ya tienes aprobado." }
+
+  matricula:
+    activa: true
+    antetitulo: Matrícula
+    titulo: Empieza esta misma semana
+    texto: "Déjanos tus datos y te llamamos para darte fecha de la primera clase. Sin compromiso."
+    items:   # ventajas con check
+      - { titulo: Matrícula en diez minutos, texto: "En la oficina o desde aquí." }
+      - { titulo: Pago a plazos, texto: "Divide el pack en varios meses sin intereses." }
+      - { titulo: Horario a tu medida, texto: "Prácticas de lunes a sábado, de 8:00 a 21:00." }
+    nota: "Descuento para estudiantes de la Universidad de León y para hermanos."
+    boton: Quiero matricularme
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Pásate por la oficina
+    texto: "Estamos en Padre Isla, a cinco minutos andando de la catedral y con parada de autobús en la puerta."
+    imagen: /placeholders/mapa.svg
+    boton: Enviar mensaje

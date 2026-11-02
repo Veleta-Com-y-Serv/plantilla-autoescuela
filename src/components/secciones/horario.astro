@@ -1,0 +1,38 @@
+---
+// Horario de teórica: banda amarilla suave partida 50/50 con la foto del aula a sangre a la izquierda y, a la
+// derecha, el titular y un panel de orientación azul (filete blanco) con las clases: día, horas (en amarillo) y
+// clase. Sin imagen, titular y panel van en dos columnas dentro del contenedor.
+// Campos: `horario[]` {dia, horas, clase} (también salen en el horario de Google), `nota`, `imagen`, `cta`.
+import { seccion, valor } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import TablaHorario from '../ui/TablaHorario.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const filas = s ? s.horario.filter((h) => h && (valor(h.dia) || valor(h.horas))) : [];
+const nota = valor(s?.nota);
+---
+
+{
+  s && (
+    <section id={id} class:list={['banda banda-suave', !s.imagen && 'seccion']}>
+      <div class:list={[s.imagen ? 'fila-sangre' : 'contenedor grid gap-10 lg:grid-cols-2 lg:gap-16']}>
+        {s.imagen && (
+          <div class="fila-sangre-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1400} alto={1050} />
+          </div>
+        )}
+        <div class:list={[s.imagen && 'fila-sangre-texto']}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {s.imagen && <TablaHorario filas={filas} class="mt-9" />}
+          {nota && <p class="mt-6 flex gap-3 font-semibold"><Icono nombre="reloj" tam={22} class="mt-0.5 shrink-0" />{nota}</p>}
+          {s.cta?.url && <a class="btn mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+        {!s.imagen && <TablaHorario filas={filas} class="self-start lg:mt-10" />}
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,114 @@
+---
+// Matrícula: banda amarilla a todo el ancho. A la izquierda titular, ventajas con check (`items[]` {titulo, texto}),
+// `nota` y botones de teléfono/WhatsApp; a la derecha el formulario sin servidor (mailto) dentro de un panel vial
+// (azul con filete blanco, como un cartel de carretera): nombre, email, teléfono, permiso y pack (desplegables con
+// los `nombre` de `permisos` y `packs` de las secciones activas; sin ellos no salen), fecha de nacimiento, turno
+// preferido y mensaje. Campos: texto, items, nota, boton.
+import { seccion, site, tel, whatsapp, valor, todosLosPermisos, todosLosPacks } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const permisos = todosLosPermisos();
+const packs = todosLosPacks();
+const ventajas = s ? s.items.filter((it) => it && valor(it.titulo)) : [];
+const nota = valor(s?.nota);
+const boton = valor(s?.boton) || 'Enviar';
+const email = c.email;
+const accion = email ? `mailto:${email}?subject=${encodeURIComponent(`Matrícula desde la web de ${site.nombre}`)}` : '';
+const p = `${id}-f`;
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-amarilla seccion">
+      <div class="contenedor grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-5">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {ventajas.length > 0 && (
+            <ul class="mt-9 grid gap-5">
+              {ventajas.map((it) => (
+                <li class="flex gap-4">
+                  <span class="senal-redonda w-11 !border-[.22rem]"><Icono nombre="check" tam={20} /></span>
+                  <div>
+                    <p class="font-[family-name:var(--fuente-titulos)] text-xl font-bold">{it.titulo}</p>
+                    {it.texto && <p class="opacity-85">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {nota && <p class="mt-8 border-l-4 border-primario pl-4 font-semibold">{nota}</p>}
+          {(c.telefono || c.whatsapp) && (
+            <div class="mt-9 flex flex-wrap gap-3.5">
+              {c.telefono && <a class="btn" href={tel(c.telefono)}><Icono nombre="telefono" tam={18} />{c.telefono}</a>}
+              {c.whatsapp && <a class="btn-sec" href={whatsapp(c.whatsapp)} rel="noopener" target="_blank"><Icono nombre="whatsapp" tam={18} />WhatsApp</a>}
+            </div>
+          )}
+        </div>
+        <div class="lg:col-span-7">
+          <form class="formulario panel-vial" action={accion || undefined} method="post" enctype="text/plain">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="campo sm:col-span-2">
+                <label for={`${p}-nombre`}>Nombre y apellidos</label>
+                <input id={`${p}-nombre`} name="nombre" type="text" autocomplete="name" required />
+              </div>
+              <div class="campo">
+                <label for={`${p}-email`}>Email</label>
+                <input id={`${p}-email`} name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="campo">
+                <label for={`${p}-telefono`}>Teléfono</label>
+                <input id={`${p}-telefono`} name="telefono" type="tel" autocomplete="tel" />
+              </div>
+              {permisos.length > 0 && (
+                <div class="campo">
+                  <label for={`${p}-permiso`}>Permiso</label>
+                  <select id={`${p}-permiso`} name="permiso">
+                    <option value="">Aún no lo sé</option>
+                    {permisos.map((t) => <option value={t}>{t}</option>)}
+                  </select>
+                </div>
+              )}
+              {packs.length > 0 && (
+                <div class="campo">
+                  <label for={`${p}-pack`}>Pack</label>
+                  <select id={`${p}-pack`} name="pack">
+                    <option value="">Aún no lo sé</option>
+                    {packs.map((t) => <option value={t}>{t}</option>)}
+                  </select>
+                </div>
+              )}
+              <div class="campo">
+                <label for={`${p}-nacimiento`}>Fecha de nacimiento</label>
+                <input id={`${p}-nacimiento`} name="nacimiento" type="date" />
+              </div>
+              <div class="campo">
+                <label for={`${p}-turno`}>¿Mañana o tarde?</label>
+                <select id={`${p}-turno`} name="turno">
+                  <option value="">Me da igual</option>
+                  <option value="Mañana">Mañana</option>
+                  <option value="Tarde">Tarde</option>
+                </select>
+              </div>
+              <div class="campo sm:col-span-2">
+                <label for={`${p}-mensaje`}>Mensaje</label>
+                <textarea id={`${p}-mensaje`} name="mensaje" rows="3"></textarea>
+              </div>
+            </div>
+            <label class="campo-check">
+              <input type="checkbox" name="privacidad" required />
+              <span>He leído el <a href="/aviso-legal">aviso legal y la política de privacidad</a>.</span>
+            </label>
+            <button type="submit" class="btn btn-amarillo">{boton}</button>
+            <p class="formulario-aviso">
+              {email ? 'Al enviar se abre tu programa de correo con la solicitud lista.' : 'Formulario de muestra: todavía no envía mensajes. Usa el teléfono de contacto.'}
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  )
+}

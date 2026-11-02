@@ -1,0 +1,57 @@
+---
+// Permisos: banda amarilla a todo el ancho con una rejilla vial (casillas separadas por líneas azules, 4 columnas en
+// escritorio, 2 en tableta, 1 en móvil). Cada permiso: señal redonda con su icono, nombre grande, triángulo de
+// advertencia con la edad mínima, texto, lo que incluye (cadena separada por «;») y el precio en placa azul.
+// Campos: `permisos[]` {nombre, texto, precio, incluye, edad_minima, icono}; `cta` (botón de cada permiso).
+// Los campos vacíos no se pintan; sin permisos queda solo el titular.
+import { seccion, valor, partes } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const permisos = s ? s.permisos.filter((p) => p && valor(p.nombre)) : [];
+---
+
+{
+  s && (
+    <section id={id} class="banda banda-amarilla seccion">
+      <div class="contenedor">
+        <div class="cabeza">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="cabeza-texto">{s.texto}</p>}
+        </div>
+      </div>
+      {permisos.length > 0 && (
+        <div class="contenedor">
+          <ul class="rejilla-vial" style={`--cols:${Math.min(permisos.length, 4)}`}>
+            {permisos.map((p) => (
+              <li class="flex flex-col">
+                <div class="flex items-start justify-between gap-4">
+                  <span class="senal-redonda w-[4.5rem]"><Icono nombre={p.icono} tam={32} /></span>
+                  {valor(p.edad_minima) && (
+                    <span class="triangulo" title={`Edad mínima: ${valor(p.edad_minima)}`}>
+                      <svg viewBox="0 0 60 54" aria-hidden="true"><path d="M30 3 57 51H3Z" fill="#fff" stroke="var(--c-primario)" stroke-width="5" stroke-linejoin="round" /></svg>
+                      <span><span class="sr-only">Edad mínima: </span>{valor(p.edad_minima)}</span>
+                    </span>
+                  )}
+                </div>
+                <h3 class="mt-6 text-[clamp(1.9rem,2.6vw,2.4rem)]">{p.nombre}</h3>
+                {p.texto && <p class="mt-3 opacity-90">{p.texto}</p>}
+                {partes(p.incluye).length > 0 && (
+                  <ul class="lista-check mt-5 text-[.98rem] font-semibold">
+                    {partes(p.incluye).map((x) => <li><Icono nombre="check" tam={18} />{x}</li>)}
+                  </ul>
+                )}
+                <div class="mt-auto flex flex-wrap items-center gap-3 pt-7">
+                  {valor(p.precio) && <span class="precio-placa">{p.precio}</span>}
+                  {s.cta?.url && <a class="btn-sec" href={s.cta.url}>{s.cta.texto}</a>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  )
+}

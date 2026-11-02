@@ -1,0 +1,71 @@
+---
+// Apartado de texto genérico (site.yaml: `tipo: texto`): banda clara. Con `imagen`, fila 50/50 con la foto a sangre a
+// la derecha; sin imagen, el texto a dos columnas (titular | párrafos). Lista opcional `items[]` (titulo, texto, icono)
+// con el icono en señal redonda y botón `cta`.
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const items = s ? s.items.filter((it) => it && it.titulo) : [];
+---
+
+{
+  s && (
+    <section id={id} class:list={['banda banda-clara', !s.imagen && 'seccion']}>
+      <div class:list={[s.imagen ? 'fila-sangre fila-sangre--der' : 'contenedor grid gap-8 lg:grid-cols-12 lg:gap-16']}>
+        {s.imagen && (
+          <div class="fila-sangre-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1400} alto={1050} />
+          </div>
+        )}
+        <div class:list={[s.imagen ? 'fila-sangre-texto' : 'lg:col-span-5']}>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          {s.imagen && (
+            <div class="mt-6 max-w-[40rem] space-y-4 text-[1.1rem] opacity-90">
+              {parrafos(s.texto).map((p) => <p>{p}</p>)}
+            </div>
+          )}
+          {s.imagen && items.length > 0 && (
+            <ul class="mt-8 grid gap-5">
+              {items.map((it) => (
+                <li class="flex gap-4">
+                  <span class="senal-redonda w-12"><Icono nombre={it.icono} tam={22} /></span>
+                  <div>
+                    <p class="text-lg font-bold">{it.titulo}</p>
+                    {it.texto && <p class="opacity-80">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.imagen && s.cta?.url && <a class="btn mt-9" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+        {!s.imagen && (
+          <div class="lg:col-span-7 lg:pt-12">
+            <div class="space-y-4 text-[1.15rem] opacity-90">
+              {parrafos(s.texto).map((p) => <p>{p}</p>)}
+            </div>
+            {items.length > 0 && (
+              <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+                {items.map((it) => (
+                  <li class="flex gap-4">
+                    <span class="senal-redonda w-12"><Icono nombre={it.icono} tam={22} /></span>
+                    <div>
+                      <p class="text-lg font-bold">{it.titulo}</p>
+                      {it.texto && <p class="opacity-80">{it.texto}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.cta?.url && <a class="btn mt-9" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}

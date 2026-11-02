@@ -1,0 +1,16 @@
+---
+// Página no encontrada: banda amarilla a pantalla casi completa con un «404» dentro de una señal redonda.
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="banda banda-amarilla">
+    <div class="contenedor flex min-h-[72svh] flex-col items-center justify-center py-20 text-center">
+      <p class="senal-redonda w-[clamp(11rem,34vw,17rem)] !border-[clamp(.8rem,2.2vw,1.3rem)] font-[family-name:var(--fuente-titulos)] text-[clamp(3.2rem,10vw,5.5rem)] font-bold leading-none tracking-tighter">404</p>
+      <h1 class="titulo-seccion mt-10">Esta calle no tiene salida</h1>
+      <p class="mx-auto mt-5 max-w-md text-lg font-semibold opacity-85">Puede que el enlace esté mal o que la página se haya movido.</p>
+      <p class="mt-10"><a class="btn" href="/">Volver al inicio</a></p>
+    </div>
+    <span class="marca-vial" aria-hidden="true"></span>
+  </section>
+</Base>

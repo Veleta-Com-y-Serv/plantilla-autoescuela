@@ -1,0 +1,93 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: autoescuela
+nombre: Autoescuela
+descripcion: Web viva para autoescuelas, con permisos, packs con precio, horario de teórica, flota y matrícula.
+sectores:
+  - { id: autoescuela, nombre: Autoescuela }
+  - { id: permiso-conducir, nombre: Permiso de conducir }
+  - { id: formacion-vial, nombre: Formación vial }
+  - { id: carnet-moto, nombre: Carnet de moto }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: permisos, nombre: Permisos }
+  - { id: packs, nombre: Packs }
+  - { id: proceso, nombre: Cómo funciona }
+  - { id: horario, nombre: Horario de teórica }
+  - { id: flota, nombre: Flota }
+  - { id: resultados, nombre: Resultados }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: matricula, nombre: Matrícula }
+  - { id: contacto, nombre: Contacto }
+estilo: vivo
+plan_minimo: gratis
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-autoescuela.noexpertise.com
+activa: true
+orden: 530
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu autoescuela"
+    pregunta: "¿Cómo se llama tu autoescuela y qué la hace diferente?"
+    ayuda: "Qué permisos enseñáis, si hay teórica online, cómo son las prácticas… y en qué localidad estáis."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto, secciones.hero.items]
+  - id: contacto
+    titulo: "Cómo os encuentran"
+    pregunta: "¿Dónde está la oficina y cómo os pueden llamar o escribir?"
+    ayuda: "Solo lo que quieras que se vea en tu web. Lo que dejes vacío no sale."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: permisos
+    titulo: "Tus permisos"
+    pregunta: "¿Qué permisos enseñáis? Nombre, para qué sirve, qué incluye y la edad mínima. El precio, si quieres. Uno por línea."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.permisos.permisos]
+  - id: packs
+    titulo: "Tus packs"
+    pregunta: "¿Tenéis packs cerrados? Cuéntame cada uno: nombre, qué incluye y el precio si quieres."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.packs.packs]
+  - id: proceso
+    titulo: "Cómo funciona"
+    pregunta: "¿Cómo es el camino de un alumno desde que se matricula hasta el examen?"
+    tipo: texto
+    campos: [secciones.proceso.titulo, secciones.proceso.texto, secciones.proceso.items]
+  - id: horario
+    titulo: "Horario de teórica"
+    pregunta: "¿Qué días y a qué horas dais clases de teórica? Una línea por clase."
+    ayuda: "Las horas de la oficina van en «Cómo os encuentran»."
+    tipo: lista
+    campos: [secciones.horario.horario]
+  - id: flota
+    titulo: "Tu flota"
+    pregunta: "¿Con qué coches, motos o camiones dais las prácticas? Uno por línea, con lo que lo hace especial."
+    ayuda: "Las fotos de cada vehículo las pones luego en Contenido."
+    tipo: lista
+    campos: [secciones.flota.items]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan más los alumnos antes de matricularse? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada y, si quieres, la del aula, la de la pista y la de fondo de las opiniones."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.horario.imagen, secciones.resultados.imagen, secciones.opiniones.imagen]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

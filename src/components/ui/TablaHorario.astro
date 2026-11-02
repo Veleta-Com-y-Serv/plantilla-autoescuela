@@ -1,0 +1,24 @@
+---
+// Panel de orientación (azul con filete blanco) con las filas de horario: día, horas en amarillo y clase.
+// Lo usa secciones/horario.astro. Filas vacías no se pintan.
+import type { Horario } from '../../data/site';
+import { valor } from '../../data/site';
+interface Props { filas: Horario[]; class?: string }
+const { filas, class: clase = '' } = Astro.props;
+---
+
+{
+  filas.length > 0 && (
+    <div class:list={['panel-vial', clase]}>
+      <ul class="tabla-horario">
+        {filas.map((h) => (
+          <li>
+            <span class="th-dia">{h.dia}</span>
+            {valor(h.clase) && <span class="th-clase">{h.clase}</span>}
+            <span class="th-horas">{h.horas}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}

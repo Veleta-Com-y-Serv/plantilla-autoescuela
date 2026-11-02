@@ -1,0 +1,41 @@
+---
+// Opiniones: banda a todo el ancho con foto a sangre de fondo (oscurecida con el asfalto) o, sin foto, en asfalto.
+// La primera opinión va en grande a la izquierda; las demás en columna a la derecha, cada una con una raya
+// amarilla encima. Campos: `testimonios[]` {texto, autor, detalle}, `imagen` (fondo). Sin opiniones no se pinta.
+import { seccion, valor } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const lista = s ? s.testimonios.filter((t) => t && valor(t.texto)) : [];
+const [primera, ...resto] = lista;
+---
+
+{
+  s && primera && (
+    <section id={id} class="banda banda-asfalto seccion">
+      {s.imagen && <div class="opiniones-foto"><Imagen src={s.imagen} alt="" ancho={1920} alto={1080} /></div>}
+      <div class="contenedor relative">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <figure class="opinion opinion--grande lg:col-span-7">
+            <span class="comillas" aria-hidden="true">“</span>
+            <blockquote>{primera.texto}</blockquote>
+            <figcaption><span class="font-bold">{primera.autor}</span>{valor(primera.detalle) && <span class="opacity-75"> · {primera.detalle}</span>}</figcaption>
+          </figure>
+          {resto.length > 0 && (
+            <div class="grid content-start gap-10 lg:col-span-5">
+              {resto.map((t) => (
+                <figure class="opinion">
+                  <blockquote>{t.texto}</blockquote>
+                  <figcaption><span class="font-bold">{t.autor}</span>{valor(t.detalle) && <span class="opacity-75"> · {t.detalle}</span>}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
