@@ -60,3 +60,14 @@ Antes de dar una orden por buena: `npm run build` sin errores.
 - `contacto.imagen`: plano a sangre que enlaza a mapas (sin plano, el formulario pasa a la derecha). `contacto.boton`.
 - Barra móvil «Llamar / WhatsApp»: sale sola con `contacto.telefono` y/o `contacto.whatsapp`.
 - Iconos disponibles (`icono:`): los de `src/components/ui/Icono.astro` (p. ej. `coche`, `moto`, `ciclomotor`, `camion`, `volante`, `semaforo`, `cono`, `carretera`, `senal`, `test`, `llave`, `ruta`, `lapiz`, `reloj`, `check`).
+
+## Páginas propias (fichas por elemento)
+- Listas con página propia (espejo de `fichas:` de template.yaml en `src/data/fichas.ts`): `secciones.permisos.permisos` → `/permisos/<slug>/` (permiso).
+  **Solo los elementos con `detalle`** (texto largo, párrafos separados por una línea en blanco, ≤ 3000 caracteres, sin HTML) tienen página;
+  los demás siguen como hasta ahora. Campos opcionales del elemento: `slug` (si falta, sale del nombre; no lo pongas sin motivo)
+  e `imagenes` («/fotos/a.jpg; /fotos/b.jpg», galería de la ficha; la foto principal es `imagen` o, si no hay, la primera de `imagenes`).
+  El resto de campos (precio, duración…) salen en la tabla de datos de la ficha.
+- Una orden «añade una página para X» = escribir su `detalle` en site.yaml. Nunca crees a mano páginas en
+  `src/pages/permisos/`: salen solas de `src/pages/[coleccion]/[slug].astro`.
+- No tocar `src/lib/paginas.ts`, `src/lib/slug.ts` ni `src/lib/seo.ts` (comunes a todas las plantillas). Las páginas propias entran solas en
+  `sitemap.xml` y `llms.txt`, con su JSON-LD (migas y servicio/producto con precio si lo hay).

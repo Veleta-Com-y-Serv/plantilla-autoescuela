@@ -315,3 +315,16 @@
   .texto-largo { max-width: 48rem; }
   .texto-largo h2 { font-family: var(--fuente-titulos); font-size: 1.6rem; }
 }
+
+/* Permisos con ficha: casilla clicable entera; el botón de matrícula queda por encima del enlace estirado */
+@layer components {
+  .permiso-casilla { position: relative; }
+  .permiso-enlace { color: inherit; text-decoration: none; }
+  .permiso-enlace::after { content: ""; position: absolute; inset: 0; }
+  .permiso-enlace:hover { text-decoration: underline; text-underline-offset: .25em; }
+  .permiso-enlace:focus-visible { outline: none; }
+  .permiso-casilla:has(.permiso-enlace:focus-visible) { outline: 3px solid var(--c-primario); outline-offset: -8px; }
+  .permiso-ver { display: inline-flex; align-items: center; gap: .3rem; font-weight: 750; }
+  .permiso-cta { position: relative; z-index: 1; }
+}
+

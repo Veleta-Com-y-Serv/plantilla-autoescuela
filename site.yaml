@@ -58,10 +58,66 @@ secciones:
     texto: "Del ciclomotor al camión. Cada permiso con su teórica, sus prácticas y la gestión del examen con Tráfico."
     cta: { texto: Quiero este permiso, url: "/#matricula" }   # botón de cada permiso
     permisos:
-      - { nombre: Permiso B, texto: "El carnet de coche de toda la vida. Para turismos de hasta 3.500 kilos y nueve plazas.", precio: "desde 390 €", incluye: "Matrícula; Teórica presencial y online; 10 prácticas", edad_minima: "18", icono: coche }
-      - { nombre: Permiso A2, texto: "Motos de hasta 35 kW. Prácticas en pista cerrada y en circulación con intercomunicador.", precio: "desde 450 €", incluye: "Matrícula; Pista de maniobras; 8 prácticas en circulación", edad_minima: "18", icono: moto }
-      - { nombre: Permiso AM, texto: "Ciclomotores de hasta 50 cc y cuadriciclos ligeros. Ideal para moverse por León desde los quince.", precio: "desde 220 €", incluye: "Matrícula; Teórica; Prácticas en pista", edad_minima: "15", icono: ciclomotor }
-      - { nombre: Permiso C, texto: "Camiones de más de 3.500 kilos. Para quien quiere trabajar en el transporte.", precio: "desde 980 €", incluye: "Matrícula; Teórica específica; Prácticas en camión", edad_minima: "21", icono: camion }
+      - nombre: Permiso B
+        texto: "El carnet de coche de toda la vida. Para turismos de hasta 3.500 kilos y nueve plazas."
+        precio: "desde 390 €"
+        incluye: "Matrícula; Teórica presencial y online; 10 prácticas"
+        edad_minima: "18"
+        icono: coche
+        imagenes: "/fotos/flota-1.jpg; /fotos/volante.jpg"
+        detalle: |
+          El permiso B es el de siempre y el que más gente se saca en nuestra autoescuela. Te habilita para conducir turismos y furgonetas pequeñas, y es la puerta de entrada a casi cualquier trabajo que pida carnet.
+
+          La teórica la puedes seguir en el aula, por la mañana o por la tarde, o desde el móvil con el test online. No hace falta apuntarse a una clase concreta: vienes a la que mejor te encaje y, cuando llevas buenos resultados en los test, te presentamos al examen.
+
+          Las prácticas se hacen en coches con doble mando y por las calles de León donde luego te examinarás. Tu profesor te va enseñando maniobras, incorporaciones, rotondas y circulación con tráfico real, siempre a tu ritmo y en las horas que te vengan bien, de lunes a sábado.
+
+          Nos encargamos del papeleo con Tráfico y, el día del examen, te llevamos al centro y te acompañamos hasta el final. Si hace falta repasar algo antes, lo trabajamos en una clase extra.
+      - nombre: Permiso A2
+        texto: "Motos de hasta 35 kW. Prácticas en pista cerrada y en circulación con intercomunicador."
+        precio: "desde 450 €"
+        incluye: "Matrícula; Pista de maniobras; 8 prácticas en circulación"
+        edad_minima: "18"
+        icono: moto
+        imagenes: "/fotos/pista.jpg; /fotos/flota-3.jpg"
+        detalle: |
+          El permiso A2 es el que abre la puerta a las motos de potencia media, hasta 35 kW. Es el camino habitual para quien empieza con la moto y quiere una máquina con la que disfrutar de verdad sin dar un salto demasiado grande.
+
+          Empiezas con la teórica, igual que en el coche, y después pasas a la pista cerrada. Allí se aprenden con calma los controles de la moto, el equilibrio, el frenado y las maniobras que se piden en el examen de circuito, sin tráfico alrededor y con el profesor muy cerca.
+
+          Cuando dominas la pista salimos a circulación. Vas con casco con intercomunicador, de modo que tu profesor te va hablando mientras conduces: te avisa de un cruce, te corrige la posición o te recuerda dónde mirar. Es la forma más segura de ganar soltura entre coches.
+
+          Te prestamos la moto y el equipo de protección durante las clases, y gestionamos contigo el examen con Tráfico. Si quieres, te orientamos también sobre qué moto comprar cuando apruebes.
+      - nombre: Permiso AM
+        texto: "Ciclomotores de hasta 50 cc y cuadriciclos ligeros. Ideal para moverse por León desde los quince."
+        precio: "desde 220 €"
+        incluye: "Matrícula; Teórica; Prácticas en pista"
+        edad_minima: "15"
+        icono: ciclomotor
+        imagenes: "/fotos/pista.jpg"
+        detalle: |
+          El permiso AM es la forma más sencilla de empezar a moverte por la ciudad con un ciclomotor o un cuadriciclo ligero. Se puede sacar desde los quince años, así que es el primer carnet de muchos jóvenes de León y de los pueblos de alrededor.
+
+          La formación combina una parte de teórica, centrada en las normas y señales que más afectan a quien va en ciclomotor, y una parte práctica en pista, donde aprendes a arrancar, frenar, esquivar obstáculos y manejar la moto con seguridad antes de pisar la calle.
+
+          Es un curso corto y muy práctico, pensado para que cojas confianza rápido. Los grupos son pequeños y el profesor corrige cada detalle: cómo ir sentado, cómo mirar antes de girar, cómo guardar la distancia con los coches aparcados.
+
+          Si eres menor, te explicamos a ti y a tu familia qué documentos hacen falta y nos ocupamos de la gestión. Y cuando cumplas la edad para el siguiente permiso, te lo ponemos fácil para dar el paso.
+      - nombre: Permiso C
+        texto: "Camiones de más de 3.500 kilos. Para quien quiere trabajar en el transporte."
+        precio: "desde 980 €"
+        incluye: "Matrícula; Teórica específica; Prácticas en camión"
+        edad_minima: "21"
+        icono: camion
+        imagenes: "/fotos/flota-4.jpg; /fotos/aula.jpg"
+        detalle: |
+          El permiso C es el que necesitas para conducir camiones de más de 3.500 kilos. Es una formación pensada para quien quiere trabajar en el transporte y busca una salida profesional con demanda.
+
+          La teórica específica se centra en lo que cambia respecto al coche: pesos y dimensiones, tiempos de conducción y descanso, carga y estiba, y las normas propias del vehículo pesado. Te la explicamos en el aula con ejemplos de trabajo real.
+
+          Las prácticas se hacen en camión, con un profesor especializado, empezando por la pista para tomar las medidas al vehículo y siguiendo por carretera. Se trabaja la maniobra a baja velocidad, el aparcamiento y los giros amplios, que es donde más se nota la diferencia con un turismo.
+
+          Para presentarte necesitas ya el permiso B y cumplir la edad mínima. Nosotros preparamos la documentación y el reconocimiento, reservamos la fecha de examen y te acompañamos ese día. Al terminar, si lo deseas, te orientamos sobre el siguiente paso para empezar a trabajar.
 
   packs:
     activa: true

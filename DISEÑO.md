@@ -58,3 +58,8 @@ sin logotipos, sin matrículas legibles y sin personas.
 - Cursivas, mayúsculas condensadas, rayas de peligro o diagonales (son de `transporte-mudanzas` y `taller-mecanico`).
 - Formas de juguete, festones o esquinas muy redondeadas (son de `escuela-infantil`).
 - Precios o cifras en los componentes: solo en `site.yaml`.
+
+## Páginas propias (fichas)
+Con la misma piel que la portada: cabecera y pie de la plantilla, migas (Inicio › Sección › Elemento), hero con la foto del
+elemento (sin foto, su icono), `detalle` en párrafos, tabla de datos, caja de contacto, galería (`imagenes`) y otros elementos
+de la misma lista.
