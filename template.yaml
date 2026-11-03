@@ -21,7 +21,7 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: vivo
 plan_minimo: gratis
-version: 1.1.0
+version: 1.2.0
 base: astrowind
 demo_url: https://demo-plantilla-autoescuela.noexpertise.com
 activa: true
@@ -30,6 +30,13 @@ orden: 530
 # Páginas propias (docs/plantillas.md § Fichas por elemento y páginas por zona). Espejo en src/data/fichas.ts.
 fichas:
   - { lista: permisos, campo: permisos, ruta: permisos, nombre: Permiso, tipo: Course }
+
+# Varias páginas (docs/plantillas.md § Varias páginas): reparto recomendado al activar «Varias páginas».
+# Inicio se queda con la portada y lo que no esté en ninguna página (aquí, resultados, opiniones).
+paginas:
+  - { ruta: permisos, titulo: Permisos, secciones: "permisos; packs" }
+  - { ruta: la-autoescuela, titulo: La autoescuela, secciones: "flota; proceso" }
+  - { ruta: matricula, titulo: Matrícula, secciones: "horario; preguntas; matricula; contacto" }
 
 # Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
 # tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
